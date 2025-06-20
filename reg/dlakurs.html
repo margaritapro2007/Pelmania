@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Регистрация заказа</title>
+<style>
+  body {
+    background-color: #E6CCFF; /* нежно-фиолетовый фон */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #4B0082;
+  }
+  h2 {
+    text-align: center;
+    padding: 20px;
+  }
+
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  button {
+    padding: 10px 20px;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+    font-size:16px;
+  }
+
+  .submit-btn {
+    background-color:#4B0082; 
+    color:#fff; 
+  }
+
+  .reset-btn {
+    background-color:#ccc; 
+    color:#000; 
+  }
+
+</style>
+</head>
+<body>
+
+<h1>Заказ онлайн</h1>
+
+<h2>Пожалуйста, введите свой электронный адрес, телефон, адрес доставки. Спасибо за то, что работаете с нами!</h2>
+
+<form id="orderForm" onsubmit="return validateForm()">
+  
+  <label for="name">Введите, пожалуйста, свое имя:</label>
+  
+  <input type="text" id="name" name="name" placeholder="Имя" required />
+  
+  <label for="surname">Фамилия:</label>
+  
+  <input type="text" id="surname" name="surname" placeholder="Фамилия" required />
+  
+  <label for="phone">Телефон:</label>
+  
+  <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" pattern="\+?\d{1,3}?[ -]?$?\d{3}$?[ -]?\d{3}[ -]?\d{2}[ -]?\d{2}" required />
+  
+  <label for="address">Адрес (улица, дом, квартира):</label>
+  
+  <input type="text" id="address" name="address" placeholder="Улица, дом, квартира" required />
+  
+  <label for="payment">Укажите форму платежа:</label>
+  
+  <select id="payment" name="payment" required>
+    <option value="">Выберите форму платежа</option>
+    <option value="наличными курьеру">Наличными курьеру</option>
+    
+ </select>
+
+<label for="email">Введите ваш e-mail:</label>
+
+<input type="email" id="email" name="email" placeholder="example@domain.com" required />
+
+<div class="buttons">
+<button type="submit" class="submit-btn">Заказать</button>
+<button type="reset" class="reset-btn">Сброс</button>
+</div>
+
+</form>
+
+<script>
+// Простая проверка формы перед отправкой
+function validateForm() {
+	const form = document.getElementById('orderForm');
+	if (!form.checkValidity()) {
+		alert('Пожалуйста, заполните все обязательные поля правильно.');
+		return false; // Не отправлять форму
+	}
+	
+	// Дополнительная проверка email
+	const email = document.getElementById('email').value.trim();
+	const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	if (!emailPattern.test(email)) {
+		alert('Пожалуйста, введите правильный email.');
+		return false;
+	}
+	
+	// Проверка телефона (можно расширить по необходимости)
+	const phone = document.getElementById('phone').value.trim();
+	if (phone === '') {
+		alert('Пожалуйста, введите номер телефона.');
+		return false;
+	}
+	
+	// Если все проверки прошли
+	alert('Спасибо за ваш заказ! Мы свяжемся с вами для подтверждения.');
+	return true; // Можно отправлять форму или обрабатывать далее
+}
+</script>
+
+</body>
+</html>
